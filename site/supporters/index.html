@@ -48,12 +48,24 @@
         <li>許可リストの URL が開けるか確認する</li>
         <li>市町村と公式サイトの紐づけの誤りを指摘する</li>
         <li>要件の Issue / Pull Request</li>
+        <li>朝の「最終取得」が更新されているか見る（<a href="#job-card">止まったときの手順</a>）</li>
       </ul>
       <p>
         <a href="https://docs.google.com/spreadsheets/d/1_dHZHMLvTx6iTCzwvbw6U9cTHjTIH_6RlEob81Ng7KM/edit?usp=sharing">運用スプレッドシート</a>
         （リンクを知っている人は閲覧可。編集は招待制）
       </p>
       <p><a href="https://github.com/office626/r808chibagouu">GitHub リポジトリ</a></p>
+    </div>
+    <div class="card" id="job-card">
+      <h2>日次の自動収集が止まったとき</h2>
+      <p>毎日 6:00（日本時間）に GitHub Actions が県防災ポータル・消防庁・気象庁を取得し、サイトを更新します。トップの「最終取得」が前日より古いままなら、ジョブが動いていません。</p>
+      <ol class="steps">
+        <li><a href="https://github.com/office626/r808chibagouu/actions/workflows/daily.yml" target="_blank" rel="noopener">Actions の「Daily collect and GitHub Pages」</a>を開き、直近の実行が失敗（赤）か、そもそも走っていないかを見る。</li>
+        <li>リポジトリに書き込み権限がある人は、同じ画面の「Run workflow」→ ブランチ main → 実行。5分ほどで「最終取得」が更新される。</li>
+        <li>権限がない人は、<a href="https://civictechzenchiba.slack.com/archives/C0BPSMN4L5D">Slack</a> か <a href="https://github.com/office626/r808chibagouu/issues/new" target="_blank" rel="noopener">GitHub の Issue</a> で「日次ジョブ停止」と知らせる。失敗ログの URL を添える。</li>
+        <li>失敗が続く場合、取得元のどれかが落ちていても他は前回の値を残す設計です。ログの <code>last_errors</code> に落ちた取得元が出ます。</li>
+      </ol>
+      <p>公開ページ側は、ジョブが止まっても前回のデータをそのまま表示します。県民の方には「最新は公式で確認」の案内が常に出ています。</p>
     </div>
     <p><a href="../resident/index.html">県民の方はこちら</a></p>
   </main>
